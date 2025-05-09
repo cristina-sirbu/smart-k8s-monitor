@@ -1,0 +1,40 @@
+# alertmanager-values.yaml
+
+fullnameOverride: prometheus-kube-prometheus
+
+alertmanager:
+  enabled: true
+  useExistingSecret: false
+  configMapOverrideName: ""
+  alertmanagerSpec:
+    replicas: 1
+  config:
+    global:
+      resolve_timeout: 5m
+    route:
+      receiver: 'null'
+      group_by: ['alertname']
+      group_wait: 10s
+      group_interval: 30s
+      repeat_interval: 1m
+      routes:
+      - match:
+          alertname: 'HighPodRestarts'
+        receiver: 'webhook-receiver'
+      # This is a default route. But if there are no receivers mentioned with the name "null", the Operator will reject the AlertManager config and the alertmanager pod will not be created.
+      # - match:
+      #     alertname: '.*'
+      #   receiver: 'null'
+    receivers:
+      - name: 'null'
+      - name: 'webhook-receiver'
+        webhook_configs:
+          - url: "https://d207-2001-2044-120f-6f00-199d-9c43-f442-6627.ngrok-free.app/alert"
+
+prometheus:
+  prometheusSpec:
+    alerting:
+      alertmanagers:
+        - namespace: default
+          name: prometheus-kube-prometheus-alertmanager
+          port: web

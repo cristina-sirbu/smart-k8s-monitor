@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pod-restart-alerts
+  labels:
+    release: prometheus
+spec:
+  groups:
+  - name: pod.rules
+    rules:
+    - alert: HighPodRestarts
+      expr: rate(kube_pod_container_status_restarts_total[2m]) > 0.001
+      for: 10s
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod is restarting too often"
+        description: "Pod {{ $labels.pod }} in namespace {{ $labels.namespace }} has frequent restarts."

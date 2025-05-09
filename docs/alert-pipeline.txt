@@ -1,0 +1,11 @@
+(Alertmanager)
+      ↓
+ [Your Flask Webhook]
+      ↓
+Extract alert details
+      ↓
+Call local LLM (e.g., via HTTP)
+      ↓
+Format response
+      ↓
+POST to Discord Webhook

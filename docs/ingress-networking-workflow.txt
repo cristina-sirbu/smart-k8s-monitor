@@ -1,0 +1,19 @@
+Browser (you type http://my-nginx.local/)
+    ↓
+OS checks /etc/hosts → 127.0.0.1 (localhost)
+    ↓
+Your laptop sends TCP traffic to 127.0.0.1:80
+    ↓
+minikube tunnel (captures that port 80 traffic)
+    ↓
+Minikube VM (inside Docker or Hyperkit)
+    ↓
+Ingress Controller Service (LoadBalancer service on port 80)
+    ↓
+Ingress Controller Pod (Nginx-Ingress running inside Minikube)
+    ↓
+Ingress Rule (routes traffic by host/path)
+    ↓
+Your nginx-service (ClusterIP service in k8s)
+    ↓
+Your nginx pods (Deployment with 3 replicas)
