@@ -3,15 +3,13 @@ import requests
 
 app = Flask(__name__)
 
-DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1370327756965023754/ZBrBCQtz1A_Y9YEjJwqhCWLj8NPRIls7o8RpsixXpPJKgyDUBjnB4l_FGZSYT7E0-ghB"
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/<TO-CHANGE>"
 
 OLLAMA_API = "http://localhost:11434/api/generate"
 
 @app.route("/alert", methods=["POST"])
 def alert():
     data = request.json
-    # print("🚨 Alert received!")
-    # print(data)
     for alert in data.get("alerts", []):
         description = alert['annotations'].get('description', 'No description.')
         prompt = f"You are a DevOps assistant. What should I do if this alert fires: {description}"
