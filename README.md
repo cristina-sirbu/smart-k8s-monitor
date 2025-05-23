@@ -59,8 +59,8 @@ service/nginx-service created
 1. Enable Minikube built-in addon for Ingress and create a tunnel.
 
 ```shell
-minikube addons enable ingress
-minikube tunnel
+$ minikube addons enable ingress
+$ minikube tunnel
 ```
 
 **Note**: This will install the nginx-ingress controller. To check if it deployed successfully run:
@@ -69,7 +69,7 @@ minikube tunnel
 kubectl get pods -n ingress-nginx
 ```
 
-By default, ingress-nginx-controller service is deployed as NodePort, and we need to change it to LoadBalacer. Edit the type of the service with the command:
+By default, ingress-nginx-controller service is deployed as NodePort, and we need it to be LoadBalacer. So we need to change it:
 
 ```shell
 kubectl edit svc ingress-nginx-controller -n ingress-nginx
