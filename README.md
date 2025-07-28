@@ -2,6 +2,8 @@
 
 An AI-enhanced Kubernetes monitoring tool that detects issues (e.g., frequent pod restarts) and uses a local LLM to propose fixes, sending notifications to Discord.
 
+**Note**: Check out full blog post about this project: [http://cristinajunca.se/2025/07/22/smart-k8s-monitoring.html](http://cristinajunca.se/2025/07/22/smart-k8s-monitoring.html).
+
 ---
 
 ## Architecture Diagram
